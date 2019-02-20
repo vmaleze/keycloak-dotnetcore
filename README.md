@@ -5,11 +5,16 @@ This project is a simple implementation of the standard Microsoft Jwt Authentica
 [keycloak](https://www.keycloak.org/).
 
 ## Setup
+### Auto
+Run `./setup-keycloak.sh` <br>
+Keycloak will start on the port 8080 with the following admin user : `Login : admin / Password : admin`
+
+### Manual
 1. Start keycloak => 
 `docker run -e KEYCLOAK_USER=<USERNAME> -e KEYCLOAK_PASSWORD=<PASSWORD> -p 8080:8080 jboss/keycloak`
 
 2. Configure audience in Keycloak
-    * Add realm or configure existing
+    * Add realm "keycloak-demo"
     * Add client my-app or use existing
     * Goto to the newly added "Client Scopes" menu
       * Add Client scope 'good-service'
@@ -23,7 +28,7 @@ This project is a simple implementation of the standard Microsoft Jwt Authentica
       * Client Scopes tab in my-app settings
       * Add available client scopes "good-service" to assigned default client scopes
   
-3. Create a user with the role "yes_we_can"
+3. Create a user `Login : user / Password : test1234` with the role "yes_we_can"
 
 ## Usage
 * Run the project `cd KeycloakDemo && dotnet run`
@@ -33,10 +38,10 @@ Ex with password scheme :
 ```bash
 curl \
   -d "client_id=my-app" \
-  -d "username=<user>" \
-  -d "password=<password>" \
+  -d "username=user" \
+  -d "password=test1234" \
   -d "grant_type=password" \
-  "http://localhost:8080/auth/realms/master/protocol/openid-connect/token"
+  "http://localhost:8080/auth/realms/keycloak-demo/protocol/openid-connect/token"
 
 ```
 * You should then be able to call the APIs :
