@@ -31,7 +31,7 @@ Keycloak will start on the port 8080 with the following admin user : `Login : ad
 3. Create a user `Login : user / Password : test1234` with the role "yes_we_can"
 
 ## Usage
-* Run the project `cd KeycloakDemo && dotnet run`
+* Run the project `cd Server && dotnet run`
 * Via postman or any other REST client, you should be able to get the token and call the secured API.
 Use the authorisation_code or password grant scheme.<br>
 Ex with password scheme : 
