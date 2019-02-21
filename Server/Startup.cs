@@ -67,6 +67,8 @@ namespace KeycloakDemo
                     }
                 };
             });
+            
+            services.AddCors();
         }
         
         public class ClaimsTransformer : IClaimsTransformation
@@ -103,6 +105,10 @@ namespace KeycloakDemo
             }
             
             app.UseAuthentication();
+            
+            app.UseCors(builder =>
+                builder.WithOrigins("*").AllowAnyHeader());
+            
             app.UseMvc();
         }
     }
